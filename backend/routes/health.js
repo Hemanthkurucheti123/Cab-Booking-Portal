@@ -1,11 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-router.get('/health', (req, res) => {
-  res.json({
-    status: 'ok',
-    message: 'Cab Booking Portal API is operational'
-  });
+router.get("/", (req, res) => {
+  res.status(200).json({ status: "ok", message: "Backend is running" });
 });
 
 module.exports = router;
