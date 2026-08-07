@@ -122,3 +122,9 @@ CREATE TABLE invoice (
   submitted_at TIMESTAMP DEFAULT NOW(),
   paid_at TIMESTAMP
 );
+INSERT INTO company_vendor_map (company_id, vendor_id, is_associated)
+VALUES (
+  (SELECT id FROM company WHERE email = 'acme@company.com'),
+  (SELECT id FROM vendor WHERE email = 'citycabs@vendor.com'),
+  true
+);

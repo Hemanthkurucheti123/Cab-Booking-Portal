@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const healthRoutes = require("./routes/health");
 const authRoutes = require("./routes/auth");
+const bookingRoutes = require("./routes/bookings");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use("/health", healthRoutes);
 app.use("/auth", authRoutes);
+app.use("/bookings", bookingRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
