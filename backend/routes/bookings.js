@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 const { requireAuth, requireRole } = require("../middleware/auth");
+const { publishNewBooking, publishStatusUpdate } = require("../queue/publisher");
 
 // CREATE BOOKING — company only
 router.post("/", requireAuth, requireRole("company"), async (req, res) => {
@@ -27,6 +28,7 @@ router.post("/", requireAuth, requireRole("company"), async (req, res) => {
       [companyId, guest_name, guest_location, guest_contact, reference_name,
        trip_details, pickup_time, drop_time, location_link]
     );
+     publishNewBooking(result.rows[0]);    
 
     res.status(201).json(result.rows[0]);
   } catch (err) {
