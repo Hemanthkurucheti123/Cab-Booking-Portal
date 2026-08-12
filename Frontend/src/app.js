@@ -1,9 +1,18 @@
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./pages/company/Login";
+import Dashboard from "./pages/company/Dashboard";
+import CreateBooking from "./pages/company/CreateBooking";
+
 function App() {
   return (
-    <div style={{ padding: "40px", fontFamily: "sans-serif" }}>
-      <h1>Cab Booking Portal</h1>
-      <p>Frontend is up and running.</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/company/login" element={<Login />} />
+        <Route path="/company/dashboard" element={<Dashboard />} />
+        <Route path="/company/create-booking" element={<CreateBooking />} />
+        <Route path="/" element={<Navigate to="/company/login" />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
