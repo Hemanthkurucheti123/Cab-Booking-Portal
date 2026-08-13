@@ -1,13 +1,12 @@
 const amqp = require("amqplib");
+require("dotenv").config();
 
 let channel = null;
 
 async function connectRabbitMQ() {
-  const connection = await amqp.connect("amqp://localhost:5672");
+  const connection = await amqp.connect(process.env.RABBITMQ_URL);
   channel = await connection.createChannel();
 
-  // Declare the queues we'll use — "durable: true" means messages survive
-  // a RabbitMQ restart (won't get lost if the server reboots)
   await channel.assertQueue("new_bookings", { durable: true });
   await channel.assertQueue("booking_status_updates", { durable: true });
 
